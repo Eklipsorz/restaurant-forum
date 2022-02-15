@@ -1,5 +1,5 @@
-const { Restaurant, Comment, User } = require('../models')
-const authHelpers = require('../helpers/auth-helpers')
+const { Restaurant, Comment, User } = require('../../models')
+const authHelpers = require('../../helpers/auth-helpers')
 
 const commentController = {
   // handling how a user create a comment about a restaurant

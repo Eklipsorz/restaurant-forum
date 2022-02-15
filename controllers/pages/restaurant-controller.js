@@ -1,6 +1,6 @@
-const paginatorHelpers = require('../helpers/pagination-helpers')
-const authHelpers = require('../helpers/auth-helpers')
-const { Restaurant, Category, User, Comment } = require('../models')
+const paginatorHelpers = require('../../helpers/pagination-helpers')
+const authHelpers = require('../../helpers/auth-helpers')
+const { Restaurant, Category, User, Comment } = require('../../models')
 
 const restaurantController = {
   getRestaurants: (req, res, next) => {

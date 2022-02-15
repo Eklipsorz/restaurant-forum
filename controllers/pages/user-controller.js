@@ -1,14 +1,14 @@
-// load bcrypt.js
+// // load bcrypt.js
 const bcrypt = require('bcryptjs')
 
-const fileHelpers = require('../helpers/file-helpers')
-const authHelpers = require('../helpers/auth-helpers')
+const fileHelpers = require('../../helpers/file-helpers')
+const authHelpers = require('../../helpers/auth-helpers')
 
 // load db
 const {
   User, Restaurant, Comment,
   Favorite, Like, Followship
-} = require('../models')
+} = require('../../models')
 
 // build controller
 const userController = {
