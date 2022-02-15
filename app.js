@@ -11,7 +11,7 @@ const handlebarsHelpers = require('./helpers/handlebars-helper')
 
 require('./models')
 
-const { pages } = require('./routes')
+const { pages, apis } = require('./routes')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -46,6 +46,7 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use('/api', apis)
 app.use(pages)
 
 app.listen(port, () => {
