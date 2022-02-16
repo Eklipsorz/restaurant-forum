@@ -1,11 +1,12 @@
 const { Restaurant, User, Category } = require('../../models')
 const helpers = require('../../helpers/file-helpers')
+const adminServices = require('../../services/admin-service')
 
 const adminController = {
   getRestaurants: (req, res, next) => {
-    return Restaurant.findAll({ raw: true, nest: true, include: [Category] })
-      .then(restaurants => res.render('admin/restaurants', { restaurants }))
-      .catch(error => next(error))
+    adminServices.getRestaurants((error, data) =>
+      error ? next(error) : res.render('admin/restaurants', data)
+    )
   },
   getUsers: (req, res, next) => {
     return User.findAll({ raw: true })
