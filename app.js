@@ -27,7 +27,7 @@ app.set('view engine', '.hbs')
 app.use('/upload', express.static(path.join(__dirname, 'upload')))
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
-
+app.use(express.json())
 app.use(session({
   secret: SESSION_SECRET,
   saveUninitialized: false,
@@ -43,6 +43,7 @@ app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
   res.locals.currentUser = getUser(req)
+  console.log(req.body)
   next()
 })
 

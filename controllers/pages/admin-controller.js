@@ -54,26 +54,11 @@ const adminController = {
       .catch(error => next(error))
   },
   postRestaurant: (req, res, next) => {
-    const { name, tel, address, openingHours, description, categoryId } = req.body
-    if (!name) throw new Error('Restaurant name is required!')
-    const { file } = req
-    helpers.imgurFileHandler(file)
-      .then(filePath =>
-        Restaurant.create({
-          name,
-          tel,
-          address,
-          openingHours,
-          description,
-          image: filePath || null,
-          categoryId
-        })
-      )
-      .then(() => {
-        req.flash('success_messages', 'restaurant was successfully created')
-        res.redirect('/admin/restaurants')
-      })
-      .catch(error => next(error))
+    adminServices.postRestaurant(req, (error, data) => {
+      if (error) return next(error)
+      req.flash('success_messages', 'restaurant was successfully deleted')
+      res.redirect('/admin/restaurants')
+    })
   },
   editRestaurant: (req, res, next) => {
     const id = req.params.id
@@ -112,17 +97,11 @@ const adminController = {
       .catch(error => next(error))
   },
   deleteRestaurant: (req, res, next) => {
-    const { id } = req.params
-
-    return Restaurant.destroy({
-      where: { id }
+    adminServices.deleteRestaurant(req, (error, data) => {
+      if (error) return next(error)
+      req.flash('success_messages', 'restaurant was successfully deleted')
+      res.redirect('/admin/restaurants')
     })
-      .then(result => {
-        if (!result) throw new Error('Restaurant didn\'t exist')
-        req.flash('success_messages', '你已成功刪除餐廳')
-        return res.redirect('/admin/restaurants')
-      })
-      .catch(error => next(error))
   }
 
 }

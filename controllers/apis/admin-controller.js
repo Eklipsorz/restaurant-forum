@@ -7,9 +7,13 @@ const adminController = {
     )
   },
   deleteRestaurant: (req, res, next) => {
-    console.log('hi')
-    adminServices.deleteRestaurant(req, (err, data) =>
-      err ? next(err) : res.json({ status: 'success', data })
+    adminServices.deleteRestaurant(req, (error, data) =>
+      error ? next(error) : res.json({ status: 'success', data })
+    )
+  },
+  postRestaurant: (req, res, next) => {
+    adminServices.postRestaurant(req, (error, data) =>
+      error ? next(error) : res.json({ status: 'success', data })
     )
   }
 }
