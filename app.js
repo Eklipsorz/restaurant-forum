@@ -1,8 +1,16 @@
+
 const express = require('express')
+
 const handlebars = require('express-handlebars')
 const flash = require('connect-flash')
 const session = require('express-session')
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const passport = require('./config/passport')
+
 const methodOverride = require('method-override')
 const path = require('path')
 
@@ -12,10 +20,6 @@ const handlebarsHelpers = require('./helpers/handlebars-helper')
 require('./models')
 
 const { pages, apis } = require('./routes')
-
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
 
 const SESSION_SECRET = 'secret'
 
@@ -43,7 +47,6 @@ app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
   res.locals.currentUser = getUser(req)
-  console.log(req.body)
   next()
 })
 

@@ -1,5 +1,3 @@
-
-const fileHelpers = require('../../helpers/file-helpers')
 const authHelpers = require('../../helpers/auth-helpers')
 const jwt = require('jsonwebtoken')
 const userController = {
@@ -7,7 +5,6 @@ const userController = {
     try {
       const userData = authHelpers.getUser(req).toJSON()
       delete userData.password
-
       const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '30d' })
 
       return res.json({
